@@ -139,6 +139,7 @@ const gameObject = {
   },
   playGame(){
     // dealCards
+    // displayCards
   },
   cardIndexRandomDigit() {
     return Math.floor(Math.random() * (this.availableCards.length - 0 + 1) + 0);
@@ -158,8 +159,36 @@ const gameObject = {
       this.playedCards.push(card);
       this.availableCards.splice(index, 1);
     }
-  }
+  },
+  displayCards(){
+    console.log(`
+      =============================\n
+      ${user.name}'s Cards:\n
+      =============================
+    `);
+    for (let a = 0; a < user.dealtCards.length; a++){
+      console.log(`
+        -----------------
+        NAME: ${user.dealtCards[a].name}
+        DAMAGE: ${user.dealtCards[a].damage}
+        -----------------
+      `);
+    }
 
+    console.log(`
+      =============================\n
+      ${computerPlayer.name}'s Cards:\n
+      =============================
+    `);
+   for (let a = 0; a < computerPlayer.dealtCards.length; a++) {
+     console.log(`
+        -----------------
+        NAME: ${computerPlayer.dealtCards[a].name}
+        DAMAGE: ${computerPlayer.dealtCards[a].damage}
+        -----------------
+      `);
+   }    
+  },
 }
 
 gameObject.start();
