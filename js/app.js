@@ -134,22 +134,29 @@ const gameObject = {
       console.log('Ready to play!');
     } else {
       console.log('Not recognized as a response, please try again.');
-      return setTimeout(() => {gameObject.start();}, 2000);
+      return setTimeout(() => {this.start();}, 2000);
     }
   },
   playGame(){
     // dealCards
   },
   cardIndexRandomDigit() {
-    return Math.floor(Math.random() * (gameObject.mainCardLibrary.length - 0 + 1) + 0);
+    return Math.floor(Math.random() * (this.availableCards.length - 0 + 1) + 0);
   },
   dealCards(){
     for (let a = 0; a < 3; a++){
       let index = this.cardIndexRandomDigit();
-      let card = gameObject.mainCardLibrary[index];
+      let card = this.availableCards[index];
       user.dealtCards.push(card);
-      gameObject.playedCards.push(card);
-      gameObject.availableCards.splice(index, 1);
+      this.playedCards.push(card);
+      this.availableCards.splice(index, 1);
+    }
+    for (let b = 0; b < 3; b++){
+      let index = this.cardIndexRandomDigit();
+      let card = this.availableCards[index];
+      computerPlayer.dealtCards.push(card);
+      this.playedCards.push(card);
+      this.availableCards.splice(index, 1);
     }
   }
 
