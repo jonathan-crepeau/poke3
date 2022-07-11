@@ -15,6 +15,7 @@ class Computer extends Player {
 }
 
 const gameObject = {
+  userBattleCard: [],
   mainCardLibrary:[{
     name: "Bulbasaur",
     damage: 60
@@ -132,17 +133,19 @@ const gameObject = {
       user = new Player('Jonathan');
       computerPlayer = new Computer('Himbo Trainer');
       console.log('Ready to play!');
+      this.playGame();
     } else {
       console.log('Not recognized as a response, please try again.');
       return setTimeout(() => {this.start();}, 2000);
     }
   },
   playGame(){
-    // dealCards
-    // displayCards
+    this.dealCards();
+    this.displayCards();
+    this.theBattle();
   },
   cardIndexRandomDigit() {
-    return Math.floor(Math.random() * (this.availableCards.length - 0 + 1) + 0);
+    return Math.floor(Math.random() * (this.availableCards.length - 0) + 0);
   },
   dealCards(){
     for (let a = 0; a < 3; a++){
@@ -161,20 +164,7 @@ const gameObject = {
     }
   },
   displayCards(){
-    console.log(`
-      =============================\n
-      ${user.name}'s Cards:\n
-      =============================
-    `);
-    for (let a = 0; a < user.dealtCards.length; a++){
-      console.log(`
-        -----------------
-        NAME: ${user.dealtCards[a].name}
-        DAMAGE: ${user.dealtCards[a].damage}
-        -----------------
-      `);
-    }
-
+    
     console.log(`
       =============================\n
       ${computerPlayer.name}'s Cards:\n
@@ -187,8 +177,39 @@ const gameObject = {
         DAMAGE: ${computerPlayer.dealtCards[a].damage}
         -----------------
       `);
-   }    
+   } 
+    
+    console.log(`
+      =============================\n
+      ${user.name}'s Cards:\n
+      =============================
+    `);
+    for (let a = 0; a < user.dealtCards.length; a++){
+      console.log(`
+        -----------------
+        NAME: ${user.dealtCards[a].name}
+        DAMAGE: ${user.dealtCards[a].damage}
+        -----------------
+      `);
+    }       
   },
+  userCardChoice(){
+    let userChoice = prompt('Which pokemon do you choose?').toLowerCase();
+    for (let b = 0; b < user.dealtCards.length; b++){
+      if (userChoice.match(user.dealtCards[b].name.toLowerCase())){
+        return user.dealtCards[b];
+      }
+    }
+      
+  },
+  theBattle(){
+    let result = this.userCardChoice();
+    if (!result) {
+      console.log('No match.');
+      setTimeout(() => {this.theBattle()},1000);
+    } else
+      console.log(result);
+  }
 }
 
 gameObject.start();
