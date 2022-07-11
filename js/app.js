@@ -17,6 +17,18 @@ class Computer extends Player {
 const gameObject = {
   userBattleCard: [],
   computerBattleCard: [],
+  scoreboard: [
+    {
+      name: 'user',
+      points: 0,
+      round: 0, 
+    },
+    {
+      name: 'computer',
+      points: 0,
+      round: 0,
+    },
+  ],
   mainCardLibrary:[{
     name: "Bulbasaur",
     damage: 60
@@ -210,6 +222,9 @@ const gameObject = {
     `)
     return 'displayed';
   },
+  displayScore(){
+
+  },
   userCardChoice(){
     let userPokemonChoice = prompt('Which of your pokemon do you choose?').toLowerCase();
     for (let a = 0; a < user.dealtCards.length; a++){
@@ -236,37 +251,52 @@ const gameObject = {
     return computerPlayer.dealtCards.splice(index, 1);
   },
   theBattle(){
-
+      let userPoints = 0;
+      let compPoints = 0;
     while (user.dealtCards.length > 0){
+      
+      
       this.displayHands();
       this.userCardChoice();
       this.computerCardChoice();
       this.displayCards();
       if (this.computerBattleCard[0].damage > this.userBattleCard[0].damage){
         console.log(`${computerPlayer.name} wins play!`);
+        compPoints += 1;
       } else if (this.computerBattleCard[0].damage == this.userBattleCard[0].damage){
         console.log('A tie, no points awarded for this play!')
       } else{
         console.log(`${user.name} wins play!`);
+        userPoints += 1;
       }
       gameObject.userBattleCard = [];;
       gameObject.computerBattleCard = [];
     }
-
+    if (userPoints > compPoints){
+      console.log(`${user.name} wins the round!`);
+      this.scoreboard[0].points += userPoints;
+      this.scoreboard[0].round += 1;
+      this.scoreboard[1].points += compPoints;
+    } else {
+      console.log(`${computerPlayer.name} wins the round!`);
+      this.scoreboard[1].points += compPoints;
+      this.scoreboard[1].round += 1;
+      this.scoreboard[0].points += userPoints;
+    }
     return this.playGame();
-
-    // let result = this.userCardChoice();
-    // if (!result) {
-    //   console.log('No match.');
-    //   setTimeout(() => {this.theBattle()},1000);
-    // } else
-    //   console.log(result);
-    //   let computerResult = this.computerCardChoice();
-    //   console.log(computerResult);
   },
   endGame(){
-    console.log('GAME OVER');
-  }
+    console.log(`
+      ===============
+      Game Over
+      ===============
+    `)
+    if (this.scoreboard[0].round > this.scoreboard[1].round){
+      console.log(`${user.name} WINS THE GAME!`)
+    } else {
+      console.log(`${computerPlayer.name} WINS THE GAME!`)
+    }
+  },
 }
 
 gameObject.start();
