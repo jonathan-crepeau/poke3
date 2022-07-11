@@ -138,7 +138,7 @@ const gameObject = {
   }],
   playedCards:[],
   start() {
-    let userResponse = 'yes'//prompt('Would you like to play?').toLowerCase();
+    let userResponse = prompt('Would you like to play? (Yes / No)').toLowerCase();
     if (userResponse.match(/yes/)){
       user = new Player(prompt('What is your name?'));
       computerPlayer = new Player('Himbo Trainer');
@@ -244,14 +244,6 @@ const gameObject = {
     }
     console.log('No match -- choose again.');
     this.userCardChoice();
-    // setTimeout(() => {this.userCardChoice()}, 1000);
-
-    // let userChoice = prompt('Which pokemon do you choose?').toLowerCase();
-    // for (let b = 0; b < user.dealtCards.length; b++){
-    //   if (userChoice.match(user.dealtCards[b].name.toLowerCase())){
-    //     return user.dealtCards[b];
-    //   }
-    // }
   },
   computerCardChoice(){
     let index = Math.floor(Math.random() * (computerPlayer.dealtCards.length  - 0) + 0);
