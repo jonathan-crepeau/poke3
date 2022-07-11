@@ -11,9 +11,6 @@ class Player {
   }
 }
 
-class Computer extends Player {
-}
-
 const gameObject = {
   userBattleCard: [],
   computerBattleCard: [],
@@ -143,8 +140,8 @@ const gameObject = {
   start() {
     let userResponse = 'yes'//prompt('Would you like to play?').toLowerCase();
     if (userResponse.match(/yes/)){
-      user = new Player('Jonathan');
-      computerPlayer = new Computer('Himbo Trainer');
+      user = new Player(prompt('What is your name?'));
+      computerPlayer = new Player('Himbo Trainer');
       console.log('Ready to play!');
       this.playGame();
     } else {
@@ -223,7 +220,18 @@ const gameObject = {
     return 'displayed';
   },
   displayScore(){
-
+    console.log(`
+      ===========================
+      ${computerPlayer.name}'s Score:
+      Points: ${this.scoreboard[1].points}
+      Rounds Won: ${this.scoreboard[1].round}
+      ===========================
+      ===========================
+      ${user.name}'s Score:
+      Points: ${this.scoreboard[0].points}
+      Rounds Won: ${this.scoreboard[0].round}
+      ===========================
+    `);
   },
   userCardChoice(){
     let userPokemonChoice = prompt('Which of your pokemon do you choose?').toLowerCase();
@@ -283,14 +291,16 @@ const gameObject = {
       this.scoreboard[1].round += 1;
       this.scoreboard[0].points += userPoints;
     }
+    this.displayScore();
     return this.playGame();
   },
   endGame(){
     console.log(`
-      ===============
-      Game Over
-      ===============
+      =============================
+         Game Over - Final Score:
+      =============================
     `)
+    this.displayScore();
     if (this.scoreboard[0].round > this.scoreboard[1].round){
       console.log(`${user.name} WINS THE GAME!`)
     } else {
