@@ -16,6 +16,7 @@ class Computer extends Player {
 
 const gameObject = {
   userBattleCard: [],
+  computerBattleCard: [],
   mainCardLibrary:[{
     name: "Bulbasaur",
     damage: 60
@@ -140,9 +141,12 @@ const gameObject = {
     }
   },
   playGame(){
-    this.dealCards();
-    this.displayCards();
-    this.theBattle();
+    if (gameObject.availableCards.length > 0) {
+      this.dealCards();
+      this.theBattle();
+    } else {
+      this.endGame();
+    }
   },
   cardIndexRandomDigit() {
     return Math.floor(Math.random() * (this.availableCards.length - 0) + 0);
@@ -163,7 +167,7 @@ const gameObject = {
       this.availableCards.splice(index, 1);
     }
   },
-  displayCards(){
+  displayHands(){
     
     console.log(`
       =============================\n
@@ -193,22 +197,75 @@ const gameObject = {
       `);
     }       
   },
+  displayCards(){
+    console.log(`
+      ====================
+      ${user.name}'s Pokemon:\n
+      --> ${gameObject.userBattleCard[0].name} : ${gameObject.userBattleCard[0].damage}
+      ====================\n
+      ====================
+      ${computerPlayer.name}'s Pokemon:\n
+      --> ${gameObject.computerBattleCard[0].name} : ${gameObject.computerBattleCard[0].damage}
+      ====================\n
+    `)
+    return 'displayed';
+  },
   userCardChoice(){
-    let userChoice = prompt('Which pokemon do you choose?').toLowerCase();
-    for (let b = 0; b < user.dealtCards.length; b++){
-      if (userChoice.match(user.dealtCards[b].name.toLowerCase())){
-        return user.dealtCards[b];
-      }
+    let userPokemonChoice = prompt('Which of your pokemon do you choose?').toLowerCase();
+    for (let a = 0; a < user.dealtCards.length; a++){
+      let card = user.dealtCards[a];
+      if (userPokemonChoice.match(card.name.toLowerCase())){
+        gameObject.userBattleCard.push(card);
+        return user.dealtCards.splice(a, 1);
+      } 
     }
-      
+    console.log('No match -- choose again.');
+    this.userCardChoice();
+    // setTimeout(() => {this.userCardChoice()}, 1000);
+
+    // let userChoice = prompt('Which pokemon do you choose?').toLowerCase();
+    // for (let b = 0; b < user.dealtCards.length; b++){
+    //   if (userChoice.match(user.dealtCards[b].name.toLowerCase())){
+    //     return user.dealtCards[b];
+    //   }
+    // }
+  },
+  computerCardChoice(){
+    let index = Math.floor(Math.random() * (computerPlayer.dealtCards.length  - 0) + 0);
+    gameObject.computerBattleCard.push(computerPlayer.dealtCards[index]);
+    return computerPlayer.dealtCards.splice(index, 1);
   },
   theBattle(){
-    let result = this.userCardChoice();
-    if (!result) {
-      console.log('No match.');
-      setTimeout(() => {this.theBattle()},1000);
-    } else
-      console.log(result);
+
+    while (user.dealtCards.length > 0){
+      this.displayHands();
+      this.userCardChoice();
+      this.computerCardChoice();
+      this.displayCards();
+      if (this.computerBattleCard[0].damage > this.userBattleCard[0].damage){
+        console.log(`${computerPlayer.name} wins play!`);
+      } else if (this.computerBattleCard[0].damage == this.userBattleCard[0].damage){
+        console.log('A tie, no points awarded for this play!')
+      } else{
+        console.log(`${user.name} wins play!`);
+      }
+      gameObject.userBattleCard = [];;
+      gameObject.computerBattleCard = [];
+    }
+
+    return this.playGame();
+
+    // let result = this.userCardChoice();
+    // if (!result) {
+    //   console.log('No match.');
+    //   setTimeout(() => {this.theBattle()},1000);
+    // } else
+    //   console.log(result);
+    //   let computerResult = this.computerCardChoice();
+    //   console.log(computerResult);
+  },
+  endGame(){
+    console.log('GAME OVER');
   }
 }
 
