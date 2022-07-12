@@ -165,14 +165,16 @@ const gameObject = {
       let index = this.cardIndexRandomDigit();
       let card = this.availableCards[index];
       user.dealtCards.push(card);
-      this.playedCards.push(card);
+      // TODO: Move this step:
+      // this.playedCards.push(card);
       this.availableCards.splice(index, 1);
     }
     for (let b = 0; b < 3; b++){
       let index = this.cardIndexRandomDigit();
       let card = this.availableCards[index];
       computerPlayer.dealtCards.push(card);
-      this.playedCards.push(card);
+      // TODO: Move this step:
+      // this.playedCards.push(card);
       this.availableCards.splice(index, 1);
     }
   },
@@ -252,6 +254,11 @@ const gameObject = {
     computerPlayer.playedCards.push(computerPlayer.dealtCards[index]);
     return computerPlayer.dealtCards.splice(index, 1);
   },
+  moveToPlayed(){
+    this.playedCards.push(this.userBattleCard[0]);
+    this.playedCards.push(this.computerBattleCard[0]);
+    console.log('played');
+  },
   theBattle(){
       let userPoints = 0;
       let compPoints = 0;
@@ -263,11 +270,14 @@ const gameObject = {
       if (this.computerBattleCard[0].damage > this.userBattleCard[0].damage){
         console.log(`${computerPlayer.name} wins play!`);
         compPoints += 1;
+        this.moveToPlayed();
       } else if (this.computerBattleCard[0].damage == this.userBattleCard[0].damage){
         console.log('A tie, no points awarded for this play!')
+        this.moveToPlayed();
       } else{
         console.log(`${user.name} wins play!`);
         userPoints += 1;
+        this.moveToPlayed();
       }
       gameObject.userBattleCard = [];;
       gameObject.computerBattleCard = [];
