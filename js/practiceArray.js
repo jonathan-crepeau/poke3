@@ -7200,3 +7200,17 @@ const tagMap = [
     Language: "pt",
   },
 ];
+
+const greys = [
+  'Meredith',
+  'Christina',
+  'George',
+  'Izzie',
+  'Alex',
+  'Bailey',
+];
+
+let result = greys.filter(grey => grey.length > 5);
+
+console.log(result);
+
