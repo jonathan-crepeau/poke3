@@ -7201,7 +7201,9 @@ const tagMap = [
   },
 ];
 
+// console.log(tagMap.filter(tagMap => tagMap.Language == 'en'));
 
+// console.log(tagMap.filter(element => element.Language === 'en'));
 
 // ======================
 // ANCHOR - filter() method examples:
@@ -7236,7 +7238,6 @@ const tagMap = [
 // let filtered = [12, 48, 2, 88, 27, 5, 7, 29, 8, 77].filter(isBigEnough);
 // console.log(filtered);
 
-
 // ======================
 // SECTION - Example 3: Return all prime numbers in the array:
 // ======================
@@ -7251,7 +7252,6 @@ const tagMap = [
 const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 // function isPrime(num) {
-
 //   for (let i = 2; num > i; i++) {
 //     if (num % i == 0) {
 //       return false;
@@ -7272,21 +7272,21 @@ let fruits = ["apple", "banana", "grapes", "mango", "orange"];
 
 function filterItems(arr, query){
   return arr.filter(function(el) {
-    console.log(el);
     // NOTE: This is the string.indexOf() method, not array.indexOf() method ... I think.
     // NOTE: Below, each element (el), or string, is set to lowercase as well as the query being set to lowercase so that the function is not case-sensitive.
+    // NOTE - The arr.filter() method above is what is returning the full element from the array (and not just the indexOf) when an element passes the test below:
     return el.toLowerCase().indexOf(query.toLowerCase()) !== -1
   })
 };
 
-// console.log(filterItems(fruits, 'ap'));
+// console.log(filterItems(fruits, 'o'));
+// NOTE: In this case, the test is asking if any of the elements, as !STRINGS! (ex: 'orange'), return an indexOf for the query. It discounts any returns of -1, which is the default return value for string.indexOf() when there is no matching occurance.
+// So "orange".indexOf("o") returns a index value other than -1, and "mango".indexOf("o") returns an index value other than -1.
+// NOTE: THEN, the arr.filter() method returns those two elements ("orange", "mango") in a new shallow copy array because they are 'true' for having an "o" character within them, while the other elements are not returned for becuase they are "false" for not having an "o" character.
 
-// let family = ['Michele', 'Bruce', 'Ryan', 'Kristen', 'Cinnamon', 'Jonathan', 'Jeremy', 'Luna'];
 
-// function filterTheseItems(arr, query) {
-//   return arr.filter(function(el) {
-//     return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
-//   })
-// };
 
-// console.log(filterTheseItems(family, 'jon'));
+
+let theseNums = [12, 48, 2, 88, 27, 5, 7, 29, 8, 77];
+
+console.log(theseNums.filter(x => x % 2 !== 0));
