@@ -7211,6 +7211,7 @@ const tagMap = [
 
 // console.log(tagMap.filter(element => element.Language === 'en'));
 
+
 // ======================
 // SECTION - Question 2: Using arr.forEach() metho with some control flow, print out only strings for the French objects (Language === 'fr):
 // ======================
@@ -7248,18 +7249,46 @@ function justFrenchStrings(arr) {
 
 // Part 4: Now with the arr.forEach() method:
 
-tagMap.forEach(function(elem) {
-  if (elem.Language === 'fr') {
-    for (let key in elem) {
-      if (typeof elem[key] === 'string') {
-        console.log(elem[key]);
-      }
-    }
-  }
-});
+// tagMap.forEach(function(elem) {
+//   if (elem.Language === 'fr') {
+//     for (let key in elem) {
+//       if (typeof elem[key] === 'string') {
+//         console.log(elem[key]);
+//       }
+//     }
+//   }
+// });
 
 
+// ======================
+// SECTION - Question 3: Use arr.every() method to confirm that no 'TagID' is '0' (zero):
+// ======================
 
+let noZeros = (element) => element.TagID !== 0;
+
+// console.log(tagMap.every(noZeros));
+
+// Part 2: Testing with another array, see if Boolean holds true when I test for no blue eyes vs. test for no brown eyes.
+let myFamilyNames = [
+  {
+    name: 'Jeremy',
+    eyeColor: 'brown',
+  },
+  {
+    name: 'Luna',
+    eyeColor: 'yellow',
+  },
+  {
+    name: 'Jonathan',
+    eyeColor: 'brown'
+  },
+];
+
+let noBlueEyes = (element) => element.eyeColor !== 'blue';
+// console.log(myFamilyNames.every(noBlueEyes));
+
+let noBrownEyes = (element) => element.eyeColor !== 'brown';
+// console.log(myFamilyNames.every(noBrownEyes));
 
 
 // ======================
