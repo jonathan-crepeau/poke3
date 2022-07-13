@@ -7285,8 +7285,16 @@ function filterItems(arr, query){
 // NOTE: THEN, the arr.filter() method returns those two elements ("orange", "mango") in a new shallow copy array because they are 'true' for having an "o" character within them, while the other elements are not returned for becuase they are "false" for not having an "o" character.
 
 
-
+// ======================
+// SECTION - Example 5: ES6 syntax w/ arr.filter() method:
+// ======================
 
 let theseNums = [12, 48, 2, 88, 27, 5, 7, 29, 8, 77];
 
+// NOTE: ES6 arrow functions -- they do not allow for if statements. Instead, they filter for the test you include:
+
+// NOTE: Example - Return a new array of the numerical elements that do not have a remainder (%) of zero when divided by '2':
 console.log(theseNums.filter(x => x % 2 !== 0));
+
+// NOTE: Example - Return a new array of the numerical elements that !DO! have a remainder (%) of zero when divided by '2':
+console.log(theseNums.filter(x => x % 2 === 0));
