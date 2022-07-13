@@ -7264,9 +7264,14 @@ function justFrenchStrings(arr) {
 // SECTION - Question 3: Use arr.every() method to confirm that no 'TagID' is '0' (zero):
 // ======================
 
-let noZeros = (element) => element.TagID !== 0;
+// NOTE - Single boolean response (T/F) as to whether all emeents in the array pass the test implemented in the provided function:
 
+let noZeros = (element) => element.TagID !== 0;
 // console.log(tagMap.every(noZeros));
+
+// OR ...
+
+// console.log(tagMap.every((element) => element.TagID !== 0));
 
 // Part 2: Testing with another array, see if Boolean holds true when I test for no blue eyes vs. test for no brown eyes.
 let myFamilyNames = [
@@ -7289,6 +7294,14 @@ let noBlueEyes = (element) => element.eyeColor !== 'blue';
 
 let noBrownEyes = (element) => element.eyeColor !== 'brown';
 // console.log(myFamilyNames.every(noBrownEyes));
+
+
+// ======================
+// SECTION - Question 4: Use arr.some() to determine whether or not there is an an object with the TagID == 46:
+// ======================
+
+console.log(tagMap.some((element) => element.TagID === 46));
+
 
 
 // ======================
