@@ -7201,16 +7201,64 @@ const tagMap = [
   },
 ];
 
-const greys = [
-  'Meredith',
-  'Christina',
-  'George',
-  'Izzie',
-  'Alex',
-  'Bailey',
-];
 
-let result = greys.filter(grey => grey.length > 5);
 
-console.log(result);
+// ======================
+// SECTION - filter() method examples:
+// ======================
 
+// ======================
+// Example 1:
+// ======================
+// const greys = [
+//   'Meredith',
+//   'Christina',
+//   'George',
+//   'Izzie',
+//   'Alex',
+//   'Bailey',
+// ];
+
+// let result = greys.filter(grey => grey.length > 5);
+
+// console.log(result);
+
+
+
+// ======================
+// Example 2: Filter an array of numbers and only return those greater than/equal to a value of '10'.
+// ======================
+
+// function isBigEnough(value) {
+//   return value >= 10
+// }
+
+// let filtered = [12, 48, 2, 88, 27, 5, 7, 29, 8, 77].filter(isBigEnough);
+// console.log(filtered);
+
+
+// ======================
+// Example 3: Return all prime numbers in the array:
+// ======================
+
+// NOTE - I was confused as to why my for loops below weren't starting with any of the values smaller than '3'.
+
+// for ([initialization]; [condition]; [final-expression])
+  // statement
+
+// [condition] - An expression to be evaluated !BEFORE! each loop iteration. If this expression evaluates to true, the statement is executed.
+
+const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+function isPrime(num) {
+
+  for (let i = 2; num > i; i++) {
+    if (num % i == 0) {
+      return false;
+    }
+  }
+  // NOTE - The return only deals with the numbers that 'skip' the for loop above because they do not meet the condition (num > 2). Specifically, the values [-3, -2, -1, 0, 1, 2] skip the for loop and continue to the next statement in this function, aka the return statement below. This ensures that '2' is included in the returned prime number array.
+  return num > 1;
+}
+
+console.log(array.filter(isPrime));

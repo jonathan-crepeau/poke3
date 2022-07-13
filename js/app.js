@@ -240,7 +240,7 @@ const gameObject = {
     for (let a = 0; a < user.dealtCards.length; a++){
       let card = user.dealtCards[a];
       if (userPokemonChoice.match(card.name.toLowerCase())){
-        gameObject.userBattleCard.push(card);
+        this.userBattleCard.push(card);
         user.playedCards.push(card);
         return user.dealtCards.splice(a, 1);
       } 
@@ -250,7 +250,7 @@ const gameObject = {
   },
   computerCardChoice(){
     let index = Math.floor(Math.random() * (computerPlayer.dealtCards.length  - 0) + 0);
-    gameObject.computerBattleCard.push(computerPlayer.dealtCards[index]);
+    this.computerBattleCard.push(computerPlayer.dealtCards[index]);
     computerPlayer.playedCards.push(computerPlayer.dealtCards[index]);
     return computerPlayer.dealtCards.splice(index, 1);
   },
@@ -263,6 +263,8 @@ const gameObject = {
       let userPoints = 0;
       let compPoints = 0;
     while (user.dealtCards.length > 0){
+
+      
       this.displayHands();
       this.userCardChoice();
       this.computerCardChoice();
