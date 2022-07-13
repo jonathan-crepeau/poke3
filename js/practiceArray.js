@@ -7300,7 +7300,22 @@ let noBrownEyes = (element) => element.eyeColor !== 'brown';
 // SECTION - Question 4: Use arr.some() to determine whether or not there is an an object with the TagID == 46:
 // ======================
 
-console.log(tagMap.some((element) => element.TagID === 46));
+// console.log(tagMap.some((element) => element.TagID === 46));
+
+// ======================
+// SECTION - Question 5: Use .map() to create a new array based on the one below. The new array will have strings formatted with the TagName and then the Language in parentheses. For example, the first element in the returned array should be the following string: 'Walt Disney World en):
+// ======================
+
+// function getThoseStrings(element) {
+//   return [element.TagName, `(${element.Language})`].join(" ");
+// }
+
+// console.log(tagMap.map(getThoseStrings));
+
+// NOTE: OR ...
+console.log(tagMap.map((element) => {
+  return [element.TagName, `(${element.Language})`].join(" ");
+}))
 
 
 
