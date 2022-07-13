@@ -1,3 +1,7 @@
+// ======================
+// ANCHOR - Practicing Array Methods:
+// ======================
+
 const tagMap = [
   {
     MapTagID: 1,
@@ -7201,9 +7205,62 @@ const tagMap = [
   },
 ];
 
-// console.log(tagMap.filter(tagMap => tagMap.Language == 'en'));
+// ======================
+// SECTION - Question 1: Use arr.filter() method to create a version of the array that has only the 'English' objects (i.e. the Language property is equal to 'en'):
+// ======================
 
 // console.log(tagMap.filter(element => element.Language === 'en'));
+
+// ======================
+// SECTION - Question 2: Using arr.forEach() metho with some control flow, print out only strings for the French objects (Language === 'fr):
+// ======================
+
+// Part 1: First console.log out just the french elements:
+// console.log(tagMap.filter(x => x.Language === 'fr'));
+
+// Part 2: Utilize latest review of arr.filter() to print all strings, regardless of language:
+
+// function justFrenchStrings(arr) {
+//   return arr.filter(function(element) {
+//     for (let item in element) {
+//       let itemHolder = element[item];
+//       if (typeof itemHolder === 'string') {
+//         console.log(itemHolder);
+//       }
+//     }
+//   })
+// }
+
+// Part 3: Now refine for just French objects (Language === 'fr'):
+function justFrenchStrings(arr) {
+  let frenchItems = arr.filter(x => x.Language === 'fr');
+  // console.log(frenchItems)
+  for (let i in frenchItems) {
+    let eachObject = frenchItems[i];
+    for (let key in eachObject) {
+      if (typeof eachObject[key] === 'string') {
+        console.log(eachObject[key]);
+      }
+    }
+  }
+}
+// justFrenchStrings(tagMap);
+
+// Part 4: Now with the arr.forEach() method:
+
+tagMap.forEach(function(elem) {
+  if (elem.Language === 'fr') {
+    for (let key in elem) {
+      if (typeof elem[key] === 'string') {
+        console.log(elem[key]);
+      }
+    }
+  }
+});
+
+
+
+
 
 // ======================
 // ANCHOR - filter() method examples:
@@ -7225,8 +7282,6 @@ const tagMap = [
 
 // console.log(result);
 
-
-
 // ======================
 // SECTION - Example 2: Filter an array of numbers and only return those greater than/equal to a value of '10'.
 // ======================
@@ -7245,7 +7300,7 @@ const tagMap = [
 // NOTE - I was confused as to why my for loops below weren't starting with any of the values smaller than '3'.
 
 // for ([initialization]; [condition]; [final-expression])
-  // statement
+// statement
 
 // [condition] - An expression to be evaluated !BEFORE! each loop iteration. If this expression evaluates to true, the statement is executed.
 
@@ -7263,27 +7318,25 @@ const array = [-3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 
 // console.log(array.filter(isPrime));
 
-
 // ======================
 // SECTION - Example 4: Searching in an array:
 // ======================
 
 let fruits = ["apple", "banana", "grapes", "mango", "orange"];
 
-function filterItems(arr, query){
-  return arr.filter(function(el) {
+function filterItems(arr, query) {
+  return arr.filter(function (el) {
     // NOTE: This is the string.indexOf() method, not array.indexOf() method ... I think.
     // NOTE: Below, each element (el), or string, is set to lowercase as well as the query being set to lowercase so that the function is not case-sensitive.
     // NOTE - The arr.filter() method above is what is returning the full element from the array (and not just the indexOf) when an element passes the test below:
-    return el.toLowerCase().indexOf(query.toLowerCase()) !== -1
-  })
-};
+    return el.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+  });
+}
 
 // console.log(filterItems(fruits, 'o'));
 // NOTE: In this case, the test is asking if any of the elements, as !STRINGS! (ex: 'orange'), return an indexOf for the query. It discounts any returns of -1, which is the default return value for string.indexOf() when there is no matching occurance.
 // So "orange".indexOf("o") returns a index value other than -1, and "mango".indexOf("o") returns an index value other than -1.
 // NOTE: THEN, the arr.filter() method returns those two elements ("orange", "mango") in a new shallow copy array because they are 'true' for having an "o" character within them, while the other elements are not returned for becuase they are "false" for not having an "o" character.
-
 
 // ======================
 // SECTION - Example 5: ES6 syntax w/ arr.filter() method:
@@ -7294,7 +7347,9 @@ let theseNums = [12, 48, 2, 88, 27, 5, 7, 29, 8, 77];
 // NOTE: ES6 arrow functions -- they do not allow for if statements. Instead, they filter for the test you include:
 
 // NOTE: Example - Return a new array of the numerical elements that do not have a remainder (%) of zero when divided by '2':
-console.log(theseNums.filter(x => x % 2 !== 0));
+
+// console.log(theseNums.filter((x) => x % 2 !== 0));
 
 // NOTE: Example - Return a new array of the numerical elements that !DO! have a remainder (%) of zero when divided by '2':
-console.log(theseNums.filter(x => x % 2 === 0));
+
+// console.log(theseNums.filter((x) => x % 2 === 0));
