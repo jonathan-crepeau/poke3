@@ -1,8 +1,11 @@
 // console.log('Fear is the mind killer.');
+console.log('My name is Jonathan');
 
 // =========================
 // ANCHOR - arr.map() Method Overview & Practice:
 // =========================
+
+// NOTE - Decent article: https://javascript.plainenglish.io/understanding-javascript-map-function-in-depth-6c8c987fcd6e
 
 // NOTE: The arr.map() method creates a !NEW! array populated with result of calling a provided function on every element in the calling array:
 
