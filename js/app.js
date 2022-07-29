@@ -1,5 +1,7 @@
 // console.log('Fear is the mind killer.');
 
+console.log('We did it Joe, we did it.');
+
 let user;
 let computerPlayer;
 
